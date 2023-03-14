@@ -1,0 +1,47 @@
+.commnet-section{
+    margin-bottom: 50px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    margin: 0 auto 50px auto;
+}
+form .labels{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 76%;
+    padding-left: 10px;
+    /* border: 1px solid black; */
+    /* background-color: aqua; */
+    /* display: flex; */
+}
+form h2{
+    text-align: center;
+}
+form .form-input {
+    /* background-color: aqua; */
+    border: 1px solid black;
+    border-radius: 8px;
+    display: flex;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+form .form-input input{
+    background-color: transparent;
+    border: none;
+}
+form .form-input  .commentBtn{
+    border-left: 1px solid black;
+}
+form .form-input select{
+    background-color: transparent;
+    border: none;
+}
+
+.comment-input{
+    width: 60%;
+    padding-left: 10px;
+}

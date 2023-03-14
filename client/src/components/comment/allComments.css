@@ -1,0 +1,21 @@
+.article-comment{
+    /* background-color: aqua; */
+    border-bottom: 1px solid rgb(224, 224, 224);
+    color: rgb(90, 90, 90);
+    
+}
+.comment-header{
+    display: flex;
+    padding: 10px 15px;
+}
+.comment-header img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+    /* padding: 10px 15px; */
+}
+.commented{
+    padding: 10px 15px;
+}
