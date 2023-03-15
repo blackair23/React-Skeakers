@@ -1,10 +1,23 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getProdById } from "../../services/productService";
 
 import './editProduct.css';
 
 export const EditProduct = ({product, onClose}) => {
     const navigate = useNavigate();
+    const { id } = useParams();
+    console.log('--------------------->', id);
+    // const [product, setProduct] = useState({});
+    // useEffect(() => {
+    //     getProdById(id)
+    //         .then(prod => {
+    //             setProduct(prod);
+    //             console.log(prod);
+    //         })
+    //         .catch(err => console.log(err));
+    // }, [id]);
+    
     const [values, setValues] = useState({
         name: product.name,
         price: product.price,
@@ -23,13 +36,29 @@ export const EditProduct = ({product, onClose}) => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log(values);
+        const productData = {
+            name: values.name,
+            price: Number(values.price),
+            stock: Number(values.stock),
+            img: [
+                values.image1,
+                values.image2,
+                values.image3,
+                values.image4,
+            ],
+            description: values.description,
+            category: values.category,
+            size: values.size,
+        }
+        console.log(productData);
+
     }
     return(
-        <div id="overlay">
+        
+        <section id="create-section">
+            <div id="overlay">
         <div className="backdrop" onClick={onClose}></div>
-            <div className="form-popup product-edit">  
-        <div className="form-part">
+        <div className="form-popup edit-product">
             <form onSubmit={onSubmit} >
                 <h2>Edit listing</h2>
                 <div className="form-element">
@@ -100,8 +129,19 @@ export const EditProduct = ({product, onClose}) => {
                 </div>
                 <input className="btn primary-btn" type="submit" value="Create"/>
             </form>
+        <div className="preview in-edit">
+            <h2>Preview</h2>
+            <article className="product-card">
+                <img src={values.image1 ? values.image1 : "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/1edb606b-0474-4096-959d-817fc0f399d4/air-force-1-low-retro-shoes-dGZSL6.png"} alt=""/>
+                <p>{values.name ? values.name : "Air Force 1 Low Retro"}</p>
+                <p>{values.category ? values.category : "Men's Shoes"}</p>
+                <p>BGN {values.price ? values.price : "249"}</p>
+            <button className="btn primary-btn" onClick={onClose}>Close</button>
+            </article>
         </div>
         </div>
+
         </div>
+    </section>
     )
 }

@@ -1,0 +1,39 @@
+
+#recived-orders{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 50px;
+    max-width: 1200px;
+    justify-content: center;
+}
+
+#recived-orders img{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    object-fit: cover;
+}
+#recived-orders .order-cart{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid black;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: 30px;
+    padding: 10px;
+}
+#recived-orders .order-cart:nth-child(odd){
+    background-color: #f0f0f1;
+}
+#recived-orders .order-cart .items-img{
+    display: flex;
+    flex-direction: row;
+}
+#recived-orders .order-cart .items-img img{
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 3px;
+}

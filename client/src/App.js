@@ -14,6 +14,7 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 import { Profile } from './components/profile/Profile';
 import { ShoppingCart } from './components/shoppingCart/ShoppingCart';
 import { CartConstext } from './context/cartContext';
+import { EditProduct } from './components/details/EditProduct';
 
 function App() {
   const [auth, setAuth] = useLocalStorage('auth', {});
@@ -50,6 +51,7 @@ function App() {
         <Route path="/" element={<><Hero/><SectionDevider/><HomeProductSection/></>}/>
         <Route path="/catalog" element={<HomeProductSection/>}/>
         <Route path="/catalog/:id" element={<Detail/>}/>
+        <Route path="/catalog/edit/:id" element={<EditProduct/>}/>
         <Route path="/about" element={<h2>About Page</h2>}/>
         <Route path="/logout" element={<Logout></Logout>}/>
         <Route path="/create" element={<Create></Create>}/>

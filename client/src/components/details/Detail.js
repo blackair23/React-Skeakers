@@ -43,8 +43,8 @@ export const Detail = () => {
         <>
         {product && product.img ? (
                 <>
-                {openModal.modal === "edit" && <EditProduct product={product} onClose={onClose}></EditProduct>}
                 <section id="details">
+                    {openModal.modal === 'edit' && <EditProduct product={product} onClose={onClose}></EditProduct>}
                     <div className="detail-images">
                         <div className="main-img">
                             <img  src={product.img[0]} alt="product img"/>
@@ -65,6 +65,7 @@ export const Detail = () => {
                         {user._id === product._ownerId._id ? 
                         <>
                         <button onClick={() => onDetailClick('edit')} className="btn primary-btn">Edit</button>
+                        {/* <Link to={`/catalog/edit/${product._id}`}><button className="btn primary-btn">Edit</button></Link> */}
                         <button onClick={() => onDetailClick('delete')} className="btn primary-btn">Delete</button>
                         </>
                         : 

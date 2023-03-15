@@ -48,8 +48,9 @@ export const Comments = () => {
     return(
             <>
             <section className="commnet-section">
+            {user._id ? 
             <form onSubmit={submitComment}>
-            <h2>Create commnet</h2>
+                <h2>Create commnet</h2>
                 <div className='labels'>
                     <label htmlFor="comment">Comment</label>
                     <label htmlFor="stars">Raiting</label>
@@ -69,6 +70,7 @@ export const Comments = () => {
                 <div className="form-element">
                 </div>
             </form>
+            : <h2>Comment Section: </h2>}   
             {coments.length > 0 ?
              coments.map(c => <AllComments key={c._id} comment={c}></AllComments>)
             :

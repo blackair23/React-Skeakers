@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import { getOrders } from "../../services/orderService";
-import { Product } from "../Product";
+import './myOrders.css'
 
 export const MyOrders = () => {
     const { user } = useContext(AuthContext);
@@ -24,34 +24,29 @@ export const MyOrders = () => {
                 setLoading(false);
             })
     }, [id]);
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //       try {
-    //         const ord = await getOrders(id);
-    //         console.log('Orders >>>',ord);
-    //         setOrders(ord);
-    //         setLoading(false);
-    //       } catch (err) {
-    //         console.log(err);
-    //         setLoading(false);
-    //       }
-    //     };
-    //     fetchData();
-    //   }, [id]);
-    // console.log('--------------->');
-    // orders.map(o => o.orderdProducts.map(c=> console.log(c)));
 
     return (
         <>
         {loading && <div>Loading...</div>}
         {!loading && orders.length > 0 && user._id === id  
             ?
-            <>
-            <h2>My Orders</h2>
-            <section id="product-section">
-                {orders.map(o => o.orderdProducts.map(c=><Product key={c._id} products={c}></Product>))}
+            <section id="orders-history">
+            <h2>Order history:</h2>
+            {orders.map((o, index) => (
+                <div key={index} className="order-items">
+                    <div>
+                    {o.orderdProducts.map((c) => (
+                        <div key={c._id} className="cart-history">
+                            <img src={c.img[0]} alt={c.title} />
+                            <p>{c.name}</p>
+                            <p>Price: ${c.price}</p>
+                        </div>
+                    ))}
+                    </div>
+                <h3 className="total-sum">Total: ${o.totalPrice}</h3>
+                </div>
+            ))}
             </section>
-            </>
             :
             <></>
         }

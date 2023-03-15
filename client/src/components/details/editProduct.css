@@ -1,14 +1,19 @@
-.form-popup.product-edit{
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.edit-product{
+    margin-top: 100px;
+    /* display: flex; */
+    height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+    align-items: normal;
+    position: relative;
+    gap:45px
 }
-
-.product-edit .form-part {
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-
+.edit-product form{
+    padding: 15px 25px;
+    margin-bottom: 25px;
+    
+}
+.in-edit{
+    /* margin-top: 15px; */
+    padding-top: 15px;
 }
