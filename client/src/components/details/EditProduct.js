@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getProdById } from "../../services/productService";
-
+import { useContext, useState } from "react";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
+import { editProduct } from "../../services/productService";
+// import { getProdById } from "../../services/productService";
+import swal from 'sweetalert';
 import './editProduct.css';
 
-export const EditProduct = ({product, onClose}) => {
-    const navigate = useNavigate();
+export const EditProduct = ({setProduct, product, onClose}) => {
+    const { user } = useContext(AuthContext);
     const { id } = useParams();
+
     console.log('--------------------->', id);
     // const [product, setProduct] = useState({});
     // useEffect(() => {
@@ -36,22 +39,17 @@ export const EditProduct = ({product, onClose}) => {
     }
     const onSubmit = async (e) => {
         e.preventDefault();
-        const productData = {
-            name: values.name,
-            price: Number(values.price),
-            stock: Number(values.stock),
-            img: [
-                values.image1,
-                values.image2,
-                values.image3,
-                values.image4,
-            ],
-            description: values.description,
-            category: values.category,
-            size: values.size,
+        try {
+            const data = await editProduct(id, user, values );
+            console.log(data);
+            setProduct(data);
+            onClose();
+        } catch (error) {
+            swal({
+                icon: "error",
+                text: error.message,
+             });
         }
-        console.log(productData);
-
     }
     return(
         

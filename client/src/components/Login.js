@@ -3,6 +3,7 @@ import { login } from '../services/authService';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/authContext'; 
+import swal from 'sweetalert';
 
 export const Login = ({onClose}) => {
     const { userLogin } = useContext(AuthContext);
@@ -25,7 +26,10 @@ export const Login = ({onClose}) => {
             navigate('/');
             
         } catch (error) {
-            console.log(error);
+            swal({
+                icon: "error",
+                text: error.message,
+             });
         }
 
     }

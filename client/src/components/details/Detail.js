@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/authContext";
 import { CartConstext } from "../../context/cartContext";
 import { getProdById } from "../../services/productService";
 import { Comments } from "../comment/Comment";
+import { DeleteProduct } from "./DeleteProduct";
 import { EditProduct } from "./EditProduct";
 export const Detail = () => {
     const { id } = useParams();
@@ -44,7 +45,8 @@ export const Detail = () => {
         {product && product.img ? (
                 <>
                 <section id="details">
-                    {openModal.modal === 'edit' && <EditProduct product={product} onClose={onClose}></EditProduct>}
+                    {openModal.modal === 'edit' && <EditProduct product={product} setProduct={setProduct} onClose={onClose}></EditProduct>}
+                    {openModal.modal === 'delete' && <DeleteProduct onClose={onClose}></DeleteProduct>}
                     <div className="detail-images">
                         <div className="main-img">
                             <img  src={product.img[0]} alt="product img"/>

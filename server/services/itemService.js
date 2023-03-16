@@ -20,16 +20,18 @@ async function create(item) {
 }
 async function update(id, item) {
     const existing = await Item.findById(id);
-
     existing.name = item.name;
     existing.price = item.price;
     existing.stock = item.stock;
-    existing.img = item.img;
+    existing.img[0] = item.image1;
+    existing.img[1] = item.image2;
+    existing.img[2] = item.image3;
+    existing.img[3] = item.image4;
     existing.description = item.description;
     existing.category = item.category;
     existing.size = item.size;
 
-    return existing.save();
+    return (await existing.save()).populate('_ownerId');
 }
 async function deleteById(id) {
     return Item.findByIdAndDelete(id);

@@ -1,3 +1,5 @@
+import swal from 'sweetalert';
+
 const request = async (method, url, data) => {
     try {
         console.log('requester data', data);
@@ -24,11 +26,24 @@ const request = async (method, url, data) => {
             })
         }
         const response = await buildReq;
+        // console.log(await response.json());
+        console.log(response.status);
+        if(response.status == 204){
+            // const result = await response.json();
+            return response;
+        };
+        if(!response.ok){
+            const result = await response.json();
+            throw new Error(result.message);
+        };
         const result = await response.json();
         console.log('aide na poslednata', result);
         return result; 
     } catch (error) {
-        alert(error);
+        swal({
+            icon: "error",
+            text: error.message,
+         });
     }
 };
 

@@ -1,4 +1,6 @@
 import { post, put } from "./requester";
+import swal from 'sweetalert';
+
 
 const baseUrl = 'http://localhost:3030';
 
@@ -18,7 +20,10 @@ export const login = async (email, password) => {
         const result = await post(`${baseUrl}/users/login`, { email, password });
         return result;
     } catch (error) {
-        alert(error)
+        swal({
+            icon: "error",
+            text: error.message,
+         });
     }
 }
 

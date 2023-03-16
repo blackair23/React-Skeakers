@@ -21,7 +21,9 @@ function App() {
   const [cart, setCart] = useLocalStorage('cart', []);
   
   const userLogin = (authData) => {
-    setAuth(authData)
+    if(authData){
+      setAuth(authData)
+    }
   }
 
   const userLogout = () => {

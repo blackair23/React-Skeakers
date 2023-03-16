@@ -1,0 +1,25 @@
+.delete-buton{
+    padding: 15px 20px;
+    background-color: #dd4040;
+    border-radius: 8px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.delete-buton:hover{
+    /* font-size: ; */
+    font-weight: bolder;
+    cursor: pointer;
+
+}
+.form-popup.delete{
+    padding: 20px 15px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.buttons-in-del{
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+    gap: 25px;
+}

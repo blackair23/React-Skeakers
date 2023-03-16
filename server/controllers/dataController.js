@@ -38,11 +38,11 @@ dataController.get('/:id', async (req, res) => {
 
 dataController.put('/:id', hasUser(), async (req, res) => {
     const item = await getById(req.params.id);
-    if(req.user._id != item._ownerId){
+    if(req.user._id != item._ownerId._id){
         return res.status(403).json({ message: 'You cannot modify this record!' })
     }
     try{
-        const result = await update(req.params.id, req.body);
+        const result = await update(req.params.id, req.body.body);
         res.json(result);
     }catch (err) {
         const message = parseError(err);
@@ -53,7 +53,7 @@ dataController.put('/:id', hasUser(), async (req, res) => {
 
 dataController.delete('/:id', hasUser(), async (req, res) => {
     const item = await getById(req.params.id);
-    if(req.user._id != item._ownerId){
+    if(req.user._id != item._ownerId._id){
         return res.status(403).json({ message: 'You cannot modify this record!' })
     }
 
