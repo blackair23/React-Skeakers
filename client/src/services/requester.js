@@ -28,8 +28,7 @@ const request = async (method, url, data) => {
         const response = await buildReq;
         // console.log(await response.json());
         console.log(response.status);
-        if(response.status == 204){
-            // const result = await response.json();
+        if(response.status === 204){
             return response;
         };
         if(!response.ok){

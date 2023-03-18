@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
 import { registration } from '../services/authService';
+import swal from 'sweetalert';
 
 
 export const Register = ({onClose}) => {
@@ -23,7 +24,10 @@ export const Register = ({onClose}) => {
         // console.log(password)
         // console.log(repass)
         if(password !== repass) {
-            alert('paswords don\'t match');
+            swal({
+                icon: "warning",
+                text: "Paswords don\'t match",
+             });
             return;
         }
         
@@ -35,7 +39,10 @@ export const Register = ({onClose}) => {
                 navigate('/');
             })
             .catch(() => {
-                alert('Unsuccesful register!');
+                swal({
+                    icon: "error",
+                    text: "Unsuccesful register!",
+                });
             })
     }
     return (

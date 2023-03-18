@@ -6,12 +6,13 @@ import { CartConstext } from '../../context/cartContext';
 import { Login } from '../Login';
 import { Register } from '../Register';
 
+import './header.css';
 
 export const Header = () => {
     const { user } = useContext(AuthContext);
     const { cart } = useContext(CartConstext);
 
-    // const [openModal, setModal] = useState(false);
+    // TODO close dropdown on outside click  
     const [openModal, setModal] = useState({modal: null, state: false});
     const onAuthClick = (modal) => {
         setModal({modal, state: true});
@@ -21,6 +22,7 @@ export const Header = () => {
     }
 
     return (
+        <>
         <header>
             {openModal.modal === "login" && <Login onClose={onClose}></Login> }
             {openModal.modal === "register" && <Register onClose={onClose}></Register> }
@@ -32,22 +34,45 @@ export const Header = () => {
                     <li><Link to='/catalog'>Catalog</Link></li>
                     <li><Link to='/about'>About us</Link></li>
                 </ul> 
+                <div className='with-dropdown'>
+                    <Link className="cart-link" to="/cart"><div className="header-cart"><i className="fa-solid fa-cart-shopping"></i> {cart.length > 0 ? <span className="cart-badge">{cart.length}</span> : ''}</div></Link>
+                    <button onClick={openModal.modal === "menu" ? () => onClose() : () => onAuthClick("menu")} className={user.profileImg? "btn-img": "btn-menu"}>{user.profileImg ? <img src={user.profileImg} /> : <i class="fa-solid fa-caret-down"></i>}</button>
                 {user.username
                 ?
                 <>
-                <Link className="cart-link" to="/cart"><div className="header-cart"><i className="fa-solid fa-cart-shopping"></i> {cart.length > 0 ? <span className="cart-badge">{cart.length}</span> : ''}</div></Link>
-                <Link to={`/profile/${user._id}`}><h3>{user.username}</h3></Link>
-                <Link to="/logout"><button className="btn">Logout</button></Link>
+                {/* <Link to={`/profile/${user._id}`}><h3>{user.username}</h3></Link>
+                <Link to="/logout"><button className="btn">Logout</button></Link> */}
                 </>
                 :
                 // <Link to="/login"><button className="btn">Sign In</button></Link>
                 <>
-                <button onClick={() => onAuthClick("login")} className="btn">Sign In</button>
-                <button onClick={() => onAuthClick("register")} className="btn">Sign Up</button>
+                {/* <button onClick={() => onAuthClick("login")} className="btn">Sign In</button>
+                <button onClick={() => onAuthClick("register")} className="btn">Sign Up</button> */}
                 </>
                 }   
                 <button className="btn burger-menu"><i className="fa-solid fa-bars"></i></button>
+                </div>
             </nav>
+            
         </header>
+        {openModal.modal == 'menu' && 
+        <div className='dropdown' onBlur={onClose}>
+        <ul role="list" > 
+            {user.username
+                ?
+                <>
+                <li><Link to={`/profile/${user._id}`} onClick={onClose}>Profile</Link></li>
+                <li><Link to='/logout' onClick={onClose}>Logout</Link></li>
+                </>
+                :
+                <>
+                <li><button onClick={() => onAuthClick("login")} className="dropdown-elemets" >Sign In</button></li>
+                <li><button onClick={() => onAuthClick("register")} className="dropdown-elemets">Sign Up</button></li>
+                </>
+            }
+        </ul> 
+        </div>
+        }
+    </>
     );
 };
