@@ -95,9 +95,19 @@
     font-weight: 600;
     position: relative;
     z-index: 3;
-    padding: 3px 10px;
+    text-align: center;
+    /* padding: 3px 10px; */
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
+.cart-btn:disabled{
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  color: #666666;
+  cursor:not-allowed;
+}
 .cart-inf{
     display: flex;
     flex-direction: row;

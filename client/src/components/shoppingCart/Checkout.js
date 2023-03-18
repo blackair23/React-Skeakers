@@ -17,7 +17,7 @@ export const Checkout = ({onClose}) => {
         let address = formData.get('address');
         data.address =  address;
         data.orderdProducts = cart;
-        cart.map(c => price += Number(c.price));
+        cart.map(c => price = price + (c.price * c.quantity));
         cart.map(c => products.push(c));
         cart.map(c => ownerId.push(c._ownerId._id));
         data.totalPrice= price;

@@ -34,10 +34,9 @@ function App() {
 
   
   const addToCartHandler = (product) => {
-    // let isExisting = cart.includes(product);
     let isExisting = cart.find((x) => x._id === product._id);
     const quantity = isExisting ? product.quantity + 1 : 1;
-    console.log("isExisting ->", isExisting);
+    let cartData;
     if(quantity > product.stock) {
       swal({
         icon: "warning",
@@ -47,13 +46,12 @@ function App() {
     }
     if(!isExisting) {
       product.quantity = 1;
-      const cartData = [...cart, product];
-      setCart(cartData);
+      cartData = [...cart, product];
     }else{
       isExisting.quantity += 1;
-      const cartData = cart.map((item) => item._id === isExisting._id ? isExisting : item);
-      setCart(cartData);
+      cartData = cart.map((item) => item._id === isExisting._id ? isExisting : item);
     }
+    setCart(cartData);
 }
 
   return (

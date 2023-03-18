@@ -6,15 +6,9 @@ import './shoppingCart.css'
 
 export const ShoppingCart = () => {
     const { cart } = useContext(CartConstext);
-    console.log(cart.indexOf(cart[1]));
     let price = 0;
     let voucher = 0;
-    cart.map(c => price += Number(c.price));
-    console.log(price);
-
-    const removeFromCart = (prod) => {
-        console.log(cart.indexOf(prod));
-    }
+    cart.map(c => price += c.price * c.quantity);
 
     const [openModal, setModal] = useState({modal: null, state: false});
 
@@ -32,7 +26,7 @@ export const ShoppingCart = () => {
             <h2 className='section-title'>Shopping Cart</h2>
         <section id="shopping-card">
         <div className="cart-shop">
-            {cart.length > 0 ?   cart.map(c => <Cart func={removeFromCart} key={c._id} carts={c}></Cart>) : <h2>Card is empty!</h2>}
+            {cart.length > 0 ?   cart.map(c => <Cart key={c._id} carts={c}></Cart>) : <h2>Card is empty!</h2>}
         </div>
         <div className="checkout">
             <div className="for-brake">
