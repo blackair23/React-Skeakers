@@ -15,6 +15,7 @@ import { Profile } from './components/profile/Profile';
 import { ShoppingCart } from './components/shoppingCart/ShoppingCart';
 import { CartConstext } from './context/cartContext';
 import { EditProduct } from './components/details/EditProduct';
+import swal from 'sweetalert';
 
 function App() {
   const [auth, setAuth] = useLocalStorage('auth', {});
@@ -33,12 +34,25 @@ function App() {
 
   
   const addToCartHandler = (product) => {
-    let isExisting = cart.includes(product);
+    // let isExisting = cart.includes(product);
+    let isExisting = cart.find((x) => x._id === product._id);
+    const quantity = isExisting ? product.quantity + 1 : 1;
+    console.log("isExisting ->", isExisting);
+    if(quantity > product.stock) {
+      swal({
+        icon: "warning",
+        text: "Product is out of stock",
+      });
+      return;
+    }
     if(!isExisting) {
+      product.quantity = 1;
       const cartData = [...cart, product];
       setCart(cartData);
     }else{
-      alert('Already added to the cart!')
+      isExisting.quantity += 1;
+      const cartData = cart.map((item) => item._id === isExisting._id ? isExisting : item);
+      setCart(cartData);
     }
 }
 

@@ -35,8 +35,8 @@ export const Header = () => {
                     <li><Link to='/about'>About us</Link></li>
                 </ul> 
                 <div className='with-dropdown'>
-                    <Link className="cart-link" to="/cart"><div className="header-cart"><i className="fa-solid fa-cart-shopping"></i> {cart.length > 0 ? <span className="cart-badge">{cart.length}</span> : ''}</div></Link>
-                    <button onClick={openModal.modal === "menu" ? () => onClose() : () => onAuthClick("menu")} className={user.profileImg? "btn-img": "btn-menu"}>{user.profileImg ? <img src={user.profileImg} /> : <i class="fa-solid fa-caret-down"></i>}</button>
+                    <Link className="cart-link" to="/cart"><div className="header-cart"><i className="fa-solid fa-cart-shopping"></i> {cart.length > 0 ? <span className="cart-badge">{cart.reduce((a, c) => a + c.quantity, 0)}</span> : ''}</div></Link>
+                    <button onClick={openModal.modal === "menu" ? () => onClose() : () => onAuthClick("menu")} className={user.profileImg? "btn-img": "btn-menu"}>{user.profileImg ? <img src={user.profileImg} alt="profile-img" /> : <i class="fa-solid fa-caret-down"></i>}</button>
                 {user.username
                 ?
                 <>
@@ -55,8 +55,9 @@ export const Header = () => {
             </nav>
             
         </header>
-        {openModal.modal == 'menu' && 
+        {openModal.modal === 'menu' && 
         <div className='dropdown' onBlur={onClose}>
+            {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
         <ul role="list" > 
             {user.username
                 ?

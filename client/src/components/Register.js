@@ -26,7 +26,7 @@ export const Register = ({onClose}) => {
         if(password !== repass) {
             swal({
                 icon: "warning",
-                text: "Paswords don\'t match",
+                text: "Paswords don't match",
              });
             return;
         }

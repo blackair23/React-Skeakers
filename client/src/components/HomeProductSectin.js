@@ -23,9 +23,9 @@ export const HomeProductSection = () => {
             products.map(p => <Product key={p._id} products={p}></Product>)
             :
             <>
-            <h2></h2>
+            <div></div>
             <h2>No available product!</h2>
-            <h2></h2>
+            <div></div>
             </>
         }
     </section>

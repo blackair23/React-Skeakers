@@ -10,13 +10,13 @@ export const Cart = ({carts, func}) => {
             <div className="cart-inf">
                 <div>
                     <p><strong>{carts.name}</strong></p>
-                    <p><strong>BGN {carts.price}</strong></p>
+                    <p><strong>BGN {carts.price * carts.quantity}</strong></p>
                 </div>
-                {/* <div>
+                <div>
                     <button className="cart-btn">-</button>
-                    <input className="input" type="number" value="1"/>
+                    <input className="input" type="number" value={carts.quantity}/>
                     <button className="cart-btn">+</button>
-                </div> */}
+                </div>
                 <button onClick={onClick} className="cart-btn">Delete</button>
             </div>
         </article>

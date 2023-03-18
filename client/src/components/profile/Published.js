@@ -28,9 +28,9 @@ export const Published = () => {
             listings.map(l => <Product key={l._id} products={l}></Product>)
             :
             <>
-            <h2></h2>
+            <div></div>
             <h2>No available product!</h2>
-            <h2></h2>
+            <div></div>
             </>
         }
         </section>
