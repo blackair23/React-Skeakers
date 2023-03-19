@@ -35,11 +35,13 @@ export const Detail = () => {
                 console.log(err);
             })
     }, [id]);
+    
+    const [main, setMainImg] = useState([]);
+    const imgHandler = (e) => {
+        console.log(e.target.src);
+        setMainImg(e.target.src)
+    }
 
-    // const [main, setMain] = useState([]);
-    // useEffect(() => {
-
-    // })
     return (
         <>
         {product && product.img ? (
@@ -48,15 +50,15 @@ export const Detail = () => {
                     {openModal.modal === 'edit' && <EditProduct product={product} setProduct={setProduct} onClose={onClose}></EditProduct>}
                     {openModal.modal === 'delete' && <DeleteProduct onClose={onClose}></DeleteProduct>}
                     <div className="detail-images">
-                        <div className="main-img">
-                            <img  src={product.img[0]} alt="product img"/>
+                    <div className="main-img" onClick={imgHandler}>
+                            <img  src={main.length > 0? main : product.img[0]} alt="product img"/>
                         </div>
-                        <div className="img1">
-                            <img  src={product.img[1]} alt="product img"/>
+                        <div className="carusel">
+                        <div className="small" onClick={imgHandler}><img  width="150"  src={product.img[0]} alt="product img"/></div>
+                        <div className="small" onClick={imgHandler}><img  src={product.img[1]} alt="product img"/></div>
+                        <div className="small" onClick={imgHandler}><img src={product.img[2]} alt="product img"/></div>
+                        <div className="small" onClick={imgHandler}><img  src={product.img[3]} alt="product img"/></div>
                         </div>
-                        <div className="img2"><img src={product.img[2]} alt="product img"/></div>
-
-                        <div className="img3"><img  src={product.img[3]} alt="product img"/></div>
                     </div>
             
                     <div className="description">
