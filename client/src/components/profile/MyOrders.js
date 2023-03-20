@@ -9,11 +9,10 @@ export const MyOrders = () => {
     const { id } = useParams();
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
-    // console.log('-------order-------->',orders);
-    // console.log('------id--------->',id);
     
     useEffect(() => {
-        getOrders(id)
+            if( user._id === id) {
+            getOrders(id)
             .then((ord) => {
                 console.log('Orders >>>',ord);
                 setOrders(ord);
@@ -23,7 +22,9 @@ export const MyOrders = () => {
                 console.log(err);
                 setLoading(false);
             })
-    }, [id]);
+        }else {
+            setLoading(false);
+        }}, [id, user]);
 
     return (
         <>

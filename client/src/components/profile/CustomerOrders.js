@@ -11,6 +11,7 @@ export const CustomerOrders = () => {
     const [loading, setLoading] = useState(true);
     
     useEffect(() => {
+        if( user._id === id) {
         getCustomerOrders(id)
             .then((ord) => {
                 console.log('Customer >>>',ord);
@@ -21,7 +22,10 @@ export const CustomerOrders = () => {
                 console.log(err);
                 setLoading(false);
             })
-    }, [id]);
+    }else {
+        setLoading(false);
+    } 
+    }, [id, user]);
 
     return (
         <>
