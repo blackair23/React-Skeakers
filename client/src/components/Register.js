@@ -19,10 +19,7 @@ export const Register = ({onClose}) => {
             password,
             repass,
         } = Object.fromEntries(new FormData(e.target));
-        // console.log(email)
-        // console.log(username)
-        // console.log(password)
-        // console.log(repass)
+
         if(password !== repass) {
             swal({
                 icon: "warning",

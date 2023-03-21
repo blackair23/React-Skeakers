@@ -80,6 +80,13 @@ nav ul li a{
   width: 25px;
   height: 20px;
 }
+
+.form-error{
+  color: #dd4040;
+}
+.form-element .error-input{
+  border: 1px solid red !important;
+}
 /* ----------------  MAIN  -------------------------------------------- */
 main{
   display: flex;

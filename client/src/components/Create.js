@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 import { create } from "../services/productService";
 
 export const Create = () => {
@@ -44,9 +45,19 @@ export const Create = () => {
             console.log('the product data >>>', data);
             navigate(`/catalog/${data._id}`);
         } catch (error) {
-            console.log(error);  
+            swal({
+                icon: "error",
+                text: error.message,
+            });
         }   
     };
+    const [errors, setErrors] = useState({});
+    const minLenght = (e, limit) => {
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: values[e.target.name].length < limit,
+        }));
+    }
     
     return (
         <section id="create-section">
@@ -55,13 +66,22 @@ export const Create = () => {
                 <h2>Create listing</h2>
                 <div className="form-element">
                     <label  htmlFor="name">Name:</label>
-                    <input type="text" id="name" name="name" placeholder="Enter name"  value={values.name} onChange={onChangeHandler}/>
+                    {errors.name && 
+                    <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Name shoud be atleast 3 charter!</p>
+                    }
+                    <input className={errors.name ? "error-input" : undefined} type="text" id="name" name="name" placeholder="Enter name"  value={values.name} onChange={onChangeHandler} onBlur={(e) => minLenght(e, 3)}/>
                 </div>
                 <div className="form-element">
                     <label htmlFor="price">Price:</label>
+                    {errors.name && 
+                    <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Price is requred!</p>
+                    }
                     <input type="number" id="price" name="price" value={values.price} onChange={onChangeHandler}/>
                 </div>
                 <div className="form-element">
+                    {errors.name && 
+                    <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Stock is requred!</p>
+                    }
                     <label htmlFor="stock">Stock:</label>
                     <input type="number" id="stock" name="stock" value={values.stock} onChange={onChangeHandler}/>
                 </div>
@@ -73,25 +93,40 @@ export const Create = () => {
                 {/* TODO temporary img */}
                 <div className="form-element">
                     <label  htmlFor="image1">Image:</label>
+                    {errors.name && 
+                    <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Invalid URL!</p>
+                    }
                     <input type="text" id="image1" name="image1" placeholder="Img URL" value={values.image1} onChange={onChangeHandler}/>
                 </div>
                 <div className="form-element">
                     <label  htmlFor="image2">Image:</label>
+                    {errors.name && 
+                    <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Invalid URL!</p>
+                    }
                     <input type="text" id="image2" name="image2" placeholder="Img URL" value={values.image2} onChange={onChangeHandler}/>
                 </div>
                 <div className="form-element">
                     <label  htmlFor="image3">Image:</label>
+                    {errors.name && 
+                    <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Invalid URL!</p>
+                    }
                     <input type="text" id="image3" name="image3" placeholder="Img URL" value={values.image3} onChange={onChangeHandler}/>
                 </div>
                 <div className="form-element">
                     <label  htmlFor="image4">Image:</label>
+                    {errors.name && 
+                    <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Invalid URL!</p>
+                    }
                     <input type="text" id="image4" name="image4" placeholder="Img URL" value={values.image4} onChange={onChangeHandler}/>
                 </div>
                 {/* End img */}
           
                 <div className="form-element">
                     <label htmlFor="description">Description</label>
-                    <textarea name="description" id="description" cols="5" rows="5" value={values.description} onChange={onChangeHandler}></textarea>
+                    {errors.description && 
+                    <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Description shoud be atleast 15 charter!</p>
+                    }
+                    <textarea name="description" id="description" cols="5" rows="5" value={values.description} onChange={onChangeHandler} onBlur={(e) => minLenght(e, 15)}></textarea>
                 </div>
 
                 <div className="form-element">
