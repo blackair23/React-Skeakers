@@ -20,19 +20,10 @@ export const Register = ({onClose}) => {
 
     const onChangeHandler = (e) => {
         setValues(state => ({...state, [e.target.name]: e.target.value}));
-        console.log(e.target.value);
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
-
-
-        // const {
-        //     email,
-        //     username,
-        //     password,
-        //     repass,
-        // } = Object.fromEntries(new FormData(e.target));
 
         if(values.password !== values.repass) {
             swal({
@@ -62,7 +53,6 @@ export const Register = ({onClose}) => {
             <div className="form-popup register">
                 <img src="/removed-Background.png" alt=""/>
                 <div className="form-part">
-                    {/* <Link to="/"><div className="close-btn"><i className="fa-solid fa-xmark"></i></div></Link>  */}
                     <button onClick={onClose} className="close-btn"><i className="fa-solid fa-xmark"></i></button>
                     <form onSubmit={onSubmit}>
                         <h2>Register</h2>

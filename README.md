@@ -3,7 +3,7 @@
 Sneak.In is a sneaker marketplace. The app allows registered users to buy, sell, and comment on sneakers from other users. The app is currently under development, with plans to add personal messaging functionality in the near future.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/95815081/224844792-ee01f1d6-a34d-4d9f-8ffc-9c216faf895a.png" />
+  <img src="https://user-images.githubusercontent.com/95815081/227042455-d8f54c0f-5dba-411e-a50b-2fbafc5cd5ea.png" />
 </p>
 
 ## Features
