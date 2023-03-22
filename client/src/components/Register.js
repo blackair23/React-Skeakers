@@ -1,26 +1,40 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../context/authContext';
 import { registration } from '../services/authService';
 import swal from 'sweetalert';
-
+import { useMinLenght, useEmailValidator } from '../hooks/useValidation';
 
 export const Register = ({onClose}) => {
     const {userLogin} = useContext(AuthContext);
     const navigate = useNavigate();
+    const [emailError, setEmailError] = useEmailValidator({});
+    const [lengthError, setLengthError] = useMinLenght({});
+    const [values, setValues] = useState({
+        email: '',
+        username: '',
+        password: '',
+        repass: '',
+    });
+
+    const onChangeHandler = (e) => {
+        setValues(state => ({...state, [e.target.name]: e.target.value}));
+        console.log(e.target.value);
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
 
 
-        const {
-            email,
-            username,
-            password,
-            repass,
-        } = Object.fromEntries(new FormData(e.target));
+        // const {
+        //     email,
+        //     username,
+        //     password,
+        //     repass,
+        // } = Object.fromEntries(new FormData(e.target));
 
-        if(password !== repass) {
+        if(values.password !== values.repass) {
             swal({
                 icon: "warning",
                 text: "Paswords don't match",
@@ -28,7 +42,7 @@ export const Register = ({onClose}) => {
             return;
         }
         
-        registration(username, email, password)
+        registration(values.username, values.email, values.password)
             .then(authData => {
                 console.log(authData);
                 userLogin(authData);
@@ -54,19 +68,28 @@ export const Register = ({onClose}) => {
                         <h2>Register</h2>
                         <div className="form-element">
                             <label htmlFor="email">Email</label>
-                            <input type="text" id="email" name="email" placeholder="Enter email"/>
+                            {emailError.email && 
+                            <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Enter valid email!</p>
+                            }
+                            <input type="text" id="email" name="email" placeholder="Enter email" value={values.email} onChange={onChangeHandler} onBlur={(e) => setEmailError(e, values)}/>
                         </div>
                         <div className="form-element">
                             <label htmlFor="username">Username</label>
-                            <input type="text" id="username" name="username" placeholder="Enter username"/>
+                            {lengthError.username && 
+                            <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Username must be atleast 3 charter!</p>
+                            }
+                            <input type="text" id="username" name="username" placeholder="Enter username" value={values.username} onChange={onChangeHandler} onBlur={(e) => setLengthError(e, 2, values)}/>
                         </div>
                         <div className="form-element">
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" name="password" placeholder="Enter password"/>
+                            {lengthError.password && 
+                            <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Password must be atleast 3 charter!</p>
+                            }
+                            <input type="password" id="password" name="password" placeholder="Enter password" value={values.password} onChange={onChangeHandler} onBlur={(e) => setLengthError(e, 2, values)}/>
                         </div>
                         <div className="form-element">
                             <label htmlFor="repass">Repeat password</label>
-                            <input type="password" id="repass" name="repass" placeholder="Repeat password"/>
+                            <input type="password" id="repass" name="repass" placeholder="Repeat password" value={values.repass} onChange={onChangeHandler} />
                         </div>
                         <input className="btn primary-btn" type="submit" value="Sign up"/>
                     </form>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
@@ -51,12 +52,26 @@ export const Create = () => {
             });
         }   
     };
+
     const [errors, setErrors] = useState({});
     const minLenght = (e, limit) => {
         setErrors(state => ({
             ...state,
-            [e.target.name]: values[e.target.name].length < limit,
+            [e.target.name]: values[e.target.name].length <= limit,
         }));
+    }
+
+    const regxValidation = (e, field) => {
+        let regx = '';
+        if(field === 'url'){
+            regx = new RegExp(/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
+        }else if (field === 'email'){
+            regx = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+        }
+        setErrors(state => ({
+            ...state,
+            [e.target.name]: !regx.test(values[e.target.name]),
+        }))
     }
     
     return (
@@ -69,21 +84,30 @@ export const Create = () => {
                     {errors.name && 
                     <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Name shoud be atleast 3 charter!</p>
                     }
-                    <input className={errors.name ? "error-input" : undefined} type="text" id="name" name="name" placeholder="Enter name"  value={values.name} onChange={onChangeHandler} onBlur={(e) => minLenght(e, 3)}/>
+                    <input 
+                    className={errors.name ? "error-input" : undefined} 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    placeholder="Enter name"  
+                    value={values.name} 
+                    onChange={onChangeHandler} 
+                    onBlur={(e) => minLenght(e, 2)}
+                    />
                 </div>
                 <div className="form-element">
                     <label htmlFor="price">Price:</label>
-                    {errors.name && 
+                    {errors.price && 
                     <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Price is requred!</p>
                     }
-                    <input type="number" id="price" name="price" value={values.price} onChange={onChangeHandler}/>
+                    <input className={errors.price ? "error-input" : undefined} type="number" id="price" name="price" value={values.price} onChange={onChangeHandler} onBlur={(e) => minLenght(e, 0)}/>
                 </div>
                 <div className="form-element">
-                    {errors.name && 
+                    {errors.stock && 
                     <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Stock is requred!</p>
                     }
                     <label htmlFor="stock">Stock:</label>
-                    <input type="number" id="stock" name="stock" value={values.stock} onChange={onChangeHandler}/>
+                    <input className={errors.stock ? "error-input" : undefined} type="number" id="stock" name="stock" value={values.stock} onChange={onChangeHandler} onBlur={(e) => minLenght(e, 0)}/>
                 </div>
           
                 {/* <div className="form-element">
@@ -93,31 +117,34 @@ export const Create = () => {
                 {/* TODO temporary img */}
                 <div className="form-element">
                     <label  htmlFor="image1">Image:</label>
-                    {errors.name && 
+                    {errors.image1 && 
                     <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Invalid URL!</p>
                     }
-                    <input type="text" id="image1" name="image1" placeholder="Img URL" value={values.image1} onChange={onChangeHandler}/>
+                    <input className={errors.image1 ? "error-input" : undefined} type="text" id="image1" name="image1" placeholder="Img URL" value={values.image1} onChange={onChangeHandler} onBlur={(e) => regxValidation(e, "url")}/>
                 </div>
+
                 <div className="form-element">
                     <label  htmlFor="image2">Image:</label>
-                    {errors.name && 
+                    {errors.image2 && 
                     <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Invalid URL!</p>
                     }
-                    <input type="text" id="image2" name="image2" placeholder="Img URL" value={values.image2} onChange={onChangeHandler}/>
+                    <input className={errors.image2 ? "error-input" : undefined} type="text" id="image2" name="image2" placeholder="Img URL" value={values.image2} onChange={onChangeHandler} onBlur={(e) => regxValidation(e, "url")}/>
                 </div>
+
                 <div className="form-element">
                     <label  htmlFor="image3">Image:</label>
-                    {errors.name && 
+                    {errors.image3 && 
                     <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Invalid URL!</p>
                     }
-                    <input type="text" id="image3" name="image3" placeholder="Img URL" value={values.image3} onChange={onChangeHandler}/>
+                    <input className={errors.image3 ? "error-input" : undefined} type="text" id="image3" name="image3" placeholder="Img URL" value={values.image3} onChange={onChangeHandler} onBlur={(e) => regxValidation(e, "url")}/>
                 </div>
+
                 <div className="form-element">
                     <label  htmlFor="image4">Image:</label>
-                    {errors.name && 
+                    {errors.image4 && 
                     <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Invalid URL!</p>
                     }
-                    <input type="text" id="image4" name="image4" placeholder="Img URL" value={values.image4} onChange={onChangeHandler}/>
+                    <input className={errors.image4 ? "error-input" : undefined} type="text" id="image4" name="image4" placeholder="Img URL" value={values.image4} onChange={onChangeHandler} onBlur={(e) => regxValidation(e, "url")}/>
                 </div>
                 {/* End img */}
           
@@ -126,7 +153,7 @@ export const Create = () => {
                     {errors.description && 
                     <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Description shoud be atleast 15 charter!</p>
                     }
-                    <textarea name="description" id="description" cols="5" rows="5" value={values.description} onChange={onChangeHandler} onBlur={(e) => minLenght(e, 15)}></textarea>
+                    <textarea className={errors.description ? "error-input" : undefined} name="description" id="description" cols="5" rows="5" value={values.description} onChange={onChangeHandler} onBlur={(e) => minLenght(e, 14)}></textarea>
                 </div>
 
                 <div className="form-element">
