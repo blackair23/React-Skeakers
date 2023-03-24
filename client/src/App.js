@@ -16,6 +16,7 @@ import { ShoppingCart } from './components/shoppingCart/ShoppingCart';
 import { CartConstext } from './context/cartContext';
 import { EditProduct } from './components/details/EditProduct';
 import swal from 'sweetalert';
+import { MessageComponent } from './components/messages/Message';
 
 function App() {
   const [auth, setAuth] = useLocalStorage('auth', {});
@@ -71,6 +72,7 @@ function App() {
         <Route path="/create" element={<Create></Create>}/>
         <Route path="/profile/:id" element={<Profile></Profile>}/>
         <Route path="/cart" element={<ShoppingCart></ShoppingCart>}/>
+        <Route path="/message" element={<MessageComponent></MessageComponent>}/>
       </Routes>
       </main>
       <Footer></Footer>

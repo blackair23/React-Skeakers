@@ -1,0 +1,113 @@
+#chat {
+    background-color: #fff;
+}
+#chat .chat-window {
+    border: 1px solid black;
+    width: 500px;
+    /* height: 600px; */
+    /* overflow-y: scroll; */
+    overflow: hidden;
+    margin: 50px auto;
+    border-radius: 8px;
+}
+
+#chat .chat-window .window{
+    height: 500px;
+    overflow-y: scroll;
+
+}
+#chat .chat-window img{
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 100px;
+}
+#chat .chat-window .sender{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    padding-right: 0;
+    padding-left: auto;
+    margin-bottom: 15px;
+}
+#chat .chat-window .sender p{
+    background-color: rgb(95, 107, 90);
+    color: #fff;
+    border-radius: 8px;
+    padding: 2px 5px ;
+    margin-right: 5px;
+    margin-left: auto;
+    max-width: 80%;
+}
+#chat .chat-window .sender img{
+    margin-right: 0;
+}
+#chat .chat-window .reciver{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    margin-right: 3px;
+    margin-left: auto;
+    margin-bottom: 15px;
+}
+#chat .chat-window .reciver p{
+    background-color: rgb(224, 224, 224);
+    margin-left: 10px;
+    border-radius: 8px;
+    padding: 2px 5px ;
+    margin-left: 5px;
+    margin-right: auto;
+    max-width: 80%;
+}
+
+#chat .chat-window .sender img{
+    margin-left: 0;
+}
+#chat .chat-window input{
+    width: 85%;
+    border: none;
+    background-color: transparent;
+    padding: 2px 4px;
+    height: 100%;
+}
+#chat .chat-window form{
+    border-top: 1px solid black;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    background-color: #ffffff;
+    height: 50px;
+    align-items: center;
+}
+#chat .chat-window button{
+    all: unset;
+    font-weight: bold;
+    height: 100%;
+    cursor: pointer;
+    width: 20%;
+    border-left: 1px solid black;
+    text-align: center;
+}
+#chat .chat-window button:hover{
+    /* background-color: aqua; */
+    height: 100%;
+    margin-right: 0;
+    font-size: large;
+    color: rgb(95, 107, 90);
+}   
+
+#style-7::-webkit-scrollbar-track{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+#style-7::-webkit-scrollbar{
+	width: 5px;
+}
+
+#style-7::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	background-color: rgb(95, 107, 90);
+}
