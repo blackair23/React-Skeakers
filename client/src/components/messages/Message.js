@@ -3,13 +3,17 @@ import { useContext } from 'react';
 import swal from 'sweetalert';
 import { AuthContext } from '../../context/authContext';
 import { getConversation } from '../../services/conversationService';
+import { getMessages, sendMessage } from '../../services/messageService';
+import { Chat } from './chat/Chat';
 import { Conversation } from './conversation/Conversation';
 import './Message.css';
 
 export const MessageComponent = () => {
     const { user } = useContext(AuthContext);
-
     const [conversations, setConversation] = useState({})
+    const [currectChat, setCurrentChat] = useState(null);
+    const [messages, setMessages] = useState({});
+    const [newMessage, setNewMessages] = useState("");
 
     useEffect(() => {
         getConversation(user._id)
@@ -23,47 +27,71 @@ export const MessageComponent = () => {
                     text: error.message,
                  });
             })
-    }, [user._id])
+    }, [user])
+
+
+    useEffect(() => {
+        getMessages(currectChat?._id)
+            .then((res)=> {
+                setMessages(res);
+            })
+            .catch((error) => {
+                swal({
+                    icon: "error",
+                    text: error.message,
+                 });
+            })
+    }, [currectChat])
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const message = {
+            conevrsationId: currectChat._id,
+            senderId: user._id,
+            text: newMessage,
+        }
+
+        try {
+            let send = await sendMessage(message);
+            setMessages([...messages, send]) 
+            setNewMessages('');
+        } catch (error) {
+            swal({
+                icon: "error",
+                text: error.message,
+            }); 
+        }
+
+
+    }
 
     return (
         <section id="chat">
             <div className='convesation-window'>
-                {conversations.length >= 0 && conversations.map((c) => <Conversation key={c._id} conversation={c} user={user}/> )}
+                {conversations.length > 0 && conversations.map((c) => 
+                    <div onClick={() => setCurrentChat(c)}>
+                        <Conversation key={c._id} conversation={c} user={user}/> 
+                    </div>
+                )}
             </div>
             <div className="chat-window" >
                 <div className="window" id="style-7">
-                    <div className="sender">
-                        <p>Lorem ipsum</p>
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt=""/>
-                    </div>
-                    <div className="reciver">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt=""/>
-                        <p>Lorem ipsum</p>
-                    </div>
-                    <div className="sender">
-                        <p>Lorem ipsum, dolor sit amet consectetur a</p>
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt=""/>
-                    </div>
-                    <div className="sender">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta esse eius non ex? Odit doloremque commodi ea soluta aut totam porro laboriosam. Nisi, dolorum quisquam!</p>
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt=""/>
-                    </div>
-                    <div className="reciver">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt=""/>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta esse eius non ex? Odit doloremque commodi ea soluta aut totam porro laboriosam. Nisi, dolorum quisquam! Adipisci qui ipsa id temporibus.</p>
-                    </div>
-                    <div className="reciver">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt=""/>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                    </div>
-                    <div className="sender">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta esse eius non ex? Odit doloremque commodi ea soluta aut totam porro laboriosam. Nisi, dolorum quisquam!</p>
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt=""/>
-                    </div> 
+                    {
+                        currectChat ?
+                        messages?.map( m => (
+                                <Chat key={m._id} message={m} conversation={currectChat} user={user}/>
+                            ))
+                        :
+                        <h3>No conversations!</h3>
+                    }
                 </div>
                 <form>
-                    <input type="text" />
-                    <button><i className="fa-regular fa-paper-plane"></i>Send</button>
+                    <input 
+                    type="text" 
+                    onChange={(e) => setNewMessages(e.target.value)}
+                    value={newMessage}
+                    />
+                    <button onClick={onSubmit}><i className="fa-regular fa-paper-plane"></i>Send</button>
                 </form>
             </div>
         </section>

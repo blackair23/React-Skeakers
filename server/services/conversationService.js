@@ -5,7 +5,10 @@ async function createConversation(conv) {
 }
 
 async function getConversations(id) {
-    return Conversation.find({ members: id}).populate('members');
+    return Conversation.find({ members: id}).populate({
+        path: 'members',
+        select: '-hashedPassword'
+      });
 }
 
 module.exports = {

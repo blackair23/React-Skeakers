@@ -71,7 +71,7 @@
 }
 #chat .chat-window .reciver{
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     text-align: left;
     margin-right: 3px;
     margin-left: auto;
