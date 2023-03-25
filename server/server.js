@@ -7,8 +7,13 @@ const trimBody = require('./middleware/trimBody');
 const dataController = require('./controllers/dataController');
 const commentController = require('./controllers/commentController');
 const orderController = require('./controllers/orderController');
+const conversationController = require('./controllers/conversationController');
+const messageController = require('./controllers/messageController');
 
-const connectionString = 'mongodb://127.0.0.1:27017/react-app-sneakers'
+require('dotenv').config();
+
+const connectionString = process.env.CONNECTION_STRING;
+const PORT = process.env.PORT;
 
 start();
 
@@ -31,6 +36,8 @@ async function start() {
     app.use('/data/catalog', dataController);
     app.use('/data/comment', commentController);
     app.use('/order', orderController);
+    app.use('/conversation', conversationController);
+    app.use('/message', messageController);
 
-    app.listen(3030, () => console.log('Server running port 3030'));
+    app.listen(PORT, () => console.log(`Server running port ${PORT}`));
 }

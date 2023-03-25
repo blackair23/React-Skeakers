@@ -1,8 +1,9 @@
 const bcrupt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const User = require("../models/User");
+require('dotenv').config();
 
-const SECRET = 'hjasvdq2982sad213bhj';
+const SECRET = process.env.SECRET;
 
 const tokenBlacklist = new Set(); 
 
