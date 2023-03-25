@@ -5,7 +5,7 @@ async function createConversation(conv) {
 }
 
 async function getConversations(id) {
-    return Conversation.find({ members: id});
+    return Conversation.find({ members: id}).populate('members');
 }
 
 module.exports = {

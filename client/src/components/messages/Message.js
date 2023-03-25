@@ -1,12 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import swal from 'sweetalert';
+import { AuthContext } from '../../context/authContext';
+import { getConversation } from '../../services/conversationService';
+import { Conversation } from './conversation/Conversation';
 import './Message.css';
 
 export const MessageComponent = () => {
+    const { user } = useContext(AuthContext);
 
-    const [message, setMessage] = useState({})
+    const [conversations, setConversation] = useState({})
+
+    useEffect(() => {
+        getConversation(user._id)
+            .then((conv) => {
+                console.log(conv);
+                setConversation(conv);
+            })
+            .catch((error) => {
+                swal({
+                    icon: "error",
+                    text: error.message,
+                 });
+            })
+    }, [user._id])
 
     return (
         <section id="chat">
+            <div className='convesation-window'>
+                {conversations.length >= 0 && conversations.map((c) => <Conversation key={c._id} conversation={c} user={user}/> )}
+            </div>
             <div className="chat-window" >
                 <div className="window" id="style-7">
                     <div className="sender">
@@ -36,7 +59,7 @@ export const MessageComponent = () => {
                     <div className="sender">
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta esse eius non ex? Odit doloremque commodi ea soluta aut totam porro laboriosam. Nisi, dolorum quisquam!</p>
                         <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=761&q=80" alt=""/>
-                    </div>
+                    </div> 
                 </div>
                 <form>
                     <input type="text" />

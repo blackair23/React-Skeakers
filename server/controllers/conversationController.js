@@ -4,7 +4,7 @@ const { parseError } = require('../util/parser');
 
 const conversationController = require('express').Router();
 
-conversationController.post('/',  async (req, res) => {
+conversationController.post('/', hasUser(), async (req, res) => {
     if(!req.body.senderId && !req.body.receiverId){
         return res.status(400).json({ message: 'Conversation members error!' })
     }
@@ -19,7 +19,7 @@ conversationController.post('/',  async (req, res) => {
     }
 });
 
-conversationController.get('/:id', async (req, res)=> {
+conversationController.get('/:id', hasUser(), async (req, res)=> {
     try {
         const result = await getConversations(req.params.id);
         res.json(result)
