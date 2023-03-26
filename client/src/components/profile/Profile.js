@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { AuthContext } from "../../context/authContext";
 import { getProfileInfo } from "../../services/profileService";
 import { Published } from "./Published";
@@ -7,6 +7,8 @@ import './profile.css';
 import { EditProfile } from "./EditProfile";
 import { MyOrders } from "./MyOrders";
 import { CustomerOrders } from "./CustomerOrders";
+import { makeConversation } from "../../services/conversationService";
+import swal from "sweetalert";
 
 export const Profile = () => {
     const { id } = useParams();
@@ -14,6 +16,8 @@ export const Profile = () => {
     const [profile, setProfile] = useState({});
 
     const [openModal, setModal] = useState({modal: null, state: false});
+
+    const navigate = useNavigate();
 
     const modalHandler = (modal) => {
         setModal({modal, state: true});
@@ -33,6 +37,20 @@ export const Profile = () => {
             })
     }, [id]);
 
+    const messageHandler = () => {
+        makeConversation(user._id, profile._id)
+            .then((conv) => {
+                console.log(conv);
+                navigate('/message');
+            })
+            .catch((error)=>{
+                swal({
+                    icon: "error",
+                    text: error.message,
+                 });
+            })
+
+    }
 
     return (
         <>
@@ -51,7 +69,7 @@ export const Profile = () => {
                     {openModal.modal === 'edit' &&<EditProfile setProfile={setProfile} onClose={closeModal}></EditProfile>}    
                 </>
                 :
-                <button className="btn primary-btn">Message</button>
+                <button onClick={messageHandler} className="btn primary-btn">Message</button>
             } 
             </div>
         </section> 

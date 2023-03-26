@@ -45,6 +45,7 @@ export const Header = () => {
                                 ?
                                 <>
                                 <li><Link to={`/profile/${user._id}`} onClick={onClose}>Profile</Link></li>
+                                <li><Link to={`/message`} onClick={onClose}>Messages</Link></li>
                                 <li><Link to='/logout' onClick={onClose}>Logout</Link></li>
                                 </>
                                 :

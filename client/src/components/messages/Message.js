@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useContext } from 'react';
 import swal from 'sweetalert';
 import { AuthContext } from '../../context/authContext';
@@ -7,13 +7,69 @@ import { getMessages, sendMessage } from '../../services/messageService';
 import { Chat } from './chat/Chat';
 import { Conversation } from './conversation/Conversation';
 import './Message.css';
+import {io} from "socket.io-client";
+// import { getProfileInfo } from '../../services/profileService';
 
 export const MessageComponent = () => {
     const { user } = useContext(AuthContext);
-    const [conversations, setConversation] = useState({})
+    const [conversations, setConversation] = useState([])
     const [currectChat, setCurrentChat] = useState(null);
-    const [messages, setMessages] = useState({});
+    const [messages, setMessages] = useState([]);
+    const [socket, setSocket] = useState(null);
     const [newMessage, setNewMessages] = useState("");
+    const [arivalMessage, setArivalMessages] = useState(null);
+    const scrollRef = useRef();
+
+    useEffect(() => {
+        setSocket(io("ws://localhost:8900"));
+   
+    }, []);
+
+    useEffect(() => {
+        socket?.on("getMessage", data => {
+            console.log(data);
+            // getProfileInfo(data.senderId)
+            // .then(prof => {
+            //     // console.log(prof);
+            //     setArivalMessages({
+            //         senderId: prof,
+            //         text: data.text,
+            //     });
+            // })
+            // .catch(err =>{
+            //     console.log(err);
+            // })
+            setArivalMessages({
+                senderId: data.senderId,
+                text: data.text,
+                // cretedAt: Date.now(),
+            });
+        });
+    }, [socket]);
+
+    useEffect(() => {
+        arivalMessage && currectChat?.members.some(e => e._id === arivalMessage.senderId) &&
+        setMessages((e) => [...e, arivalMessage]);
+        console.log('---------------=',arivalMessage);
+        console.log('---------------=', currectChat?.members);
+        // console.log('---------------=', arivalMessage.senderId._id);
+    }, [arivalMessage, currectChat])
+
+    useEffect(() => {
+        socket?.emit("addUser", user._id);
+        socket?.on("getUsers", users => {
+            console.log('->>>>',users); 
+            // console.log(users); 
+        })
+
+        
+    }, [socket, user]);
+    
+    // useEffect(() => {
+    //     socket?.on("getMessage", message => {
+    //         console.log(message)
+    //     })
+    // }, [])
 
     useEffect(() => {
         getConversation(user._id)
@@ -41,7 +97,11 @@ export const MessageComponent = () => {
                     text: error.message,
                  });
             })
-    }, [currectChat])
+    }, [currectChat]);
+
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: "smooth" })
+    }, [messages])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -51,6 +111,20 @@ export const MessageComponent = () => {
             text: newMessage,
         }
 
+        const reciverId = currectChat.members.find(m => m._id !== user._id);
+        console.log(reciverId);
+        socket.emit("sendMessage", {
+            senderId: user._id,
+            reciverId: reciverId._id,
+            text: newMessage,
+        })
+        if(newMessage === "") {
+            swal({
+                icon: "warning",
+                text: "Can not send empty text",  
+            })
+            return
+        }
         try {
             let send = await sendMessage(message);
             setMessages([...messages, send]) 
@@ -61,8 +135,6 @@ export const MessageComponent = () => {
                 text: error.message,
             }); 
         }
-
-
     }
 
     return (
@@ -79,7 +151,9 @@ export const MessageComponent = () => {
                     {
                         currectChat ?
                         messages?.map( m => (
-                                <Chat key={m._id} message={m} conversation={currectChat} user={user}/>
+                                <div ref={scrollRef}>
+                                    <Chat key={m._id} message={m} conversation={currectChat} user={user}/>
+                                </div>
                             ))
                         :
                         <h3>No conversations!</h3>
