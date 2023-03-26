@@ -1,6 +1,6 @@
 # Sneak.In
 
-Sneak.In is a sneaker marketplace. The app allows registered users to buy, sell, and comment on sneakers from other users. The app is currently under development, with plans to add personal messaging functionality in the near future.
+Sneak.In is a sneaker marketplace that allows registered users to buy, sell, and comment on sneakers from other users. The app has real-time messaging functionality using socket.io, allowing users to communicate with each other. Sneak.In is currently under development, with plans to continuously improve and add new features in the future.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/95815081/227042455-d8f54c0f-5dba-411e-a50b-2fbafc5cd5ea.png" />
@@ -13,7 +13,7 @@ Sneak.In is a sneaker marketplace. The app allows registered users to buy, sell,
   - Commenting on sneakers
   - Editing and deleting user listings
   - Profile section with order history
-  - Personal messaging (coming soon)
+  - **Personal messaging** 
      
 ## Technologies Used
   
@@ -21,6 +21,7 @@ Sneak.In is a sneaker marketplace. The app allows registered users to buy, sell,
   - Node.js
   - Express
   - MongoDB
+  - Socket.io
 
 ## Installation
 
