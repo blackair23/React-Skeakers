@@ -1,0 +1,108 @@
+#search {
+    background-color: black;
+    color: #fff;
+    height: 500px;
+    margin: 48px 20px;
+    font-weight: bold;
+    padding: 15px 10px;
+    width: 220px;
+}
+
+#search .seach-by-name{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+#search .seach-by-name input{
+    background-color: black;
+    border: 1px solid #fff;
+    color: #fff;
+    width: 200px;
+}
+
+
+#search .seach-by-price .input-price{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+#search .seach-by-price .input-price input{
+    width: 50%;
+}
+
+#search .size{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+ /* Customize the label (the container) */
+ /* #search .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+   */
+  /* Hide the browser's default checkbox */
+  /* #search .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  } */
+  
+  /* Create a custom checkbox */
+  /* #search .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+  } */
+  
+  /* On mouse-over, add a grey background color */
+  /* #search .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  } */
+  
+  /* When the checkbox is checked, add a blue background */
+  /* #search .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  } */
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  /* #search .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  } */
+  
+  /* Show the checkmark when checked */
+  /* #search .container input:checked ~ .checkmark:after {
+    display: block;
+  } */
+  
+  /* Style the checkmark/indicator */
+  /* #search .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }  */

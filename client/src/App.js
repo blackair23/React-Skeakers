@@ -17,6 +17,7 @@ import { CartConstext } from './context/cartContext';
 import { EditProduct } from './components/details/EditProduct';
 import swal from 'sweetalert';
 import { MessageComponent } from './components/messages/Message';
+import { Catalog } from './components/catalog/Catalog';
 
 function App() {
   const [auth, setAuth] = useLocalStorage('auth', {});
@@ -64,7 +65,7 @@ function App() {
       <main>
       <Routes>
         <Route path="/" element={<><Hero/><SectionDevider/><HomeProductSection/></>}/>
-        <Route path="/catalog" element={<HomeProductSection/>}/>
+        <Route path="/catalog" element={<Catalog/>}/>
         <Route path="/catalog/:id" element={<Detail/>}/>
         <Route path="/catalog/edit/:id" element={<EditProduct/>}/>
         <Route path="/about" element={<h2>About Page</h2>}/>

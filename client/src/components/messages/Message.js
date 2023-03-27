@@ -22,7 +22,6 @@ export const MessageComponent = () => {
 
     useEffect(() => {
         setSocket(io("ws://localhost:8900"));
-   
     }, []);
 
     useEffect(() => {
@@ -65,11 +64,6 @@ export const MessageComponent = () => {
         
     }, [socket, user]);
     
-    // useEffect(() => {
-    //     socket?.on("getMessage", message => {
-    //         console.log(message)
-    //     })
-    // }, [])
 
     useEffect(() => {
         getConversation(user._id)
@@ -101,7 +95,7 @@ export const MessageComponent = () => {
 
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" })
-    }, [messages])
+    }, [messages]);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -112,7 +106,7 @@ export const MessageComponent = () => {
         }
 
         const reciverId = currectChat.members.find(m => m._id !== user._id);
-        console.log(reciverId);
+        // console.log(reciverId);
         socket.emit("sendMessage", {
             senderId: user._id,
             reciverId: reciverId._id,
