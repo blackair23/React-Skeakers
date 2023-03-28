@@ -1,7 +1,7 @@
 #search {
     background-color: black;
     color: #fff;
-    height: 500px;
+    height: 550px;
     margin: 48px 20px;
     font-weight: bold;
     padding: 15px 10px;
@@ -13,96 +13,115 @@
     flex-direction: column;
     margin-bottom: 20px;
     gap: 10px;
-}
-
-#search .seach-by-name input{
+  }
+  
+  
+  #search .seach-by-name input{
     background-color: black;
     border: 1px solid #fff;
     color: #fff;
     width: 200px;
+    padding: 5px;
 }
 
 
 #search .seach-by-price .input-price{
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 #search .seach-by-price .input-price input{
-    width: 50%;
+  width: 50%;
 }
 
 #search .size{
-    display: flex;
-    flex-direction: column;
-    margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
 }
 
- /* Customize the label (the container) */
- /* #search .container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-   */
-  /* Hide the browser's default checkbox */
-  /* #search .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  } */
-  
-  /* Create a custom checkbox */
-  /* #search .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-  } */
-  
-  /* On mouse-over, add a grey background color */
-  /* #search .container:hover input ~ .checkmark {
-    background-color: #ccc;
-  } */
-  
-  /* When the checkbox is checked, add a blue background */
-  /* #search .container input:checked ~ .checkmark {
-    background-color: #2196F3;
-  } */
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-  /* #search .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  } */
-  
-  /* Show the checkmark when checked */
-  /* #search .container input:checked ~ .checkmark:after {
-    display: block;
-  } */
-  
-  /* Style the checkmark/indicator */
-  /* #search .container .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }  */
+#search .size label:first-child{
+  margin-bottom: 10px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+#search .container input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+}
+#search .container input[type="checkbox"] {
+  appearance: none;
+  background-color: #000000;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+}
+
+#search .container input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #ffffff;
+}
+.price{
+  all: unset;
+  background-color: #000000;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#search .container input[type="checkbox"] {
+  display: grid;
+  place-content: center;
+}
+
+#search .container input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #ffffff;
+}
+
+#search .container input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+#search .category-dropdown{
+  margin-top: 15px;
+}
+
+#search .category-dropdown select{
+  background-color: #000000;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 5px;
+  margin-top: 10px;
+}

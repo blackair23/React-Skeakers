@@ -1,5 +1,9 @@
+import { useContext } from "react"
 import { Link } from "react-router-dom"
+import { AuthContext } from "../../context/authContext"
 export const Footer = () => {
+
+    const { user } = useContext(AuthContext)
     return (
         <footer>
             <section id="footer">
@@ -19,10 +23,12 @@ export const Footer = () => {
                     <h2 className="bottom-title">EXPLORE</h2>
                     {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
                     <ul className="explore-list" role="list">
-                        <li><Link>SELL</Link></li>
-                        <li><Link>CATALOG</Link></li>
-                        <li><Link>ABOUT US</Link></li>
-                        <li><Link>PROFILE</Link></li>
+                        <li><Link to={`/create`}>SELL</Link></li>
+                        <li><Link to={`/catalog`}>CATALOG</Link></li>
+                        <li><Link to={`/about`}>ABOUT US</Link></li>
+                        {user._id? 
+                        <li><Link to={`/profile/${user._id}`}>PROFILE</Link></li>
+                        : ""}
                     </ul>
                 </div>
             </section>
