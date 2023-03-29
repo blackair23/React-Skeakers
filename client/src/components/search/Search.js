@@ -1,12 +1,23 @@
+import { useEffect, useState } from 'react';
 import './search.css';
 
-export const Search = () => {
+export const Search = ({products, filtered}) => {
+
+    const [values, setValues] = useState("");
+
+    const onChangeHandler = (e) => {
+        setValues(state => ({...state, [e.target.name]: e.target.value}));
+        const filterdProducts = products.filter(product => {
+            return product.name.toLowerCase().includes((values["search-by-name"] ? values["search-by-name"] : e.target.value).toLocaleLowerCase())
+        }) 
+        filtered(filterdProducts);
+    }
 
     return (
         <section id="search">
             <div className="seach-by-name">
                 <label htmlFor="seach-by-name">Search:</label>
-                <input name="seach-by-name" type="text" />
+                <input onChange={onChangeHandler} value={values["search-by-name"]}  name="seach-by-name" type="text" />
             </div>
             <div className="seach-by-price">
                 <label htmlFor="seach-by-price">Price range:</label>
@@ -20,7 +31,7 @@ export const Search = () => {
 
                  <label className="container">
                 <span className="checkmark"></span>
-                <input type="checkbox" checked="checked"/>
+                <input type="checkbox"/>
                 36</label>
 
                 <label className="container">

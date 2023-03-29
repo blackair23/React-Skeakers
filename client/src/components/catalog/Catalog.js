@@ -7,24 +7,29 @@ import './catalog.css';
 export const Catalog = () => {
 
     const [products, setProducts] = useState([]);
-
+    const [filterProd, setFilterProd] = useState(products);
     useEffect(() => {
         getHomeProducts()
             .then(prod => {
                 setProducts(prod);
+                setFilterProd(prod)
             })
             .catch(err => {
                 console.log(err);
             })
     }, []);
 
+    const filtered = (prod) => {
+        setFilterProd(prod);
+    }
+
     return (
         <section id="catalog">
-            <Search></Search>
+            <Search filtered={filtered} products={products}></Search>
             <section id="product-section">
-                    {products.length > 0
+                    {filterProd.length > 0
                     ?
-                    products.map(p => <Product key={p._id} products={p}></Product>)
+                    filterProd.map(p => <Product key={p._id} products={p}></Product>)
                     :
                     <>
                     <div></div>
