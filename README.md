@@ -39,8 +39,17 @@ The app is running on http://localhost:3000.
 
 ### Back End
 
+First you shoud make .env file in folder */server* with variables -> **CONNECTION_STRING** | **PORT** | **SECRET**
+
 `cd server`
 
 `npm start`
 
-The app is running on http://localhost:3030.
+
+### Socket.io
+
+`cd socket`
+
+`npm start`
+
+The app is running on http://localhost:8900.
