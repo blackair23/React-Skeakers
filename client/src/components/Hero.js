@@ -17,9 +17,13 @@ export const Hero = () => {
         </div>
         <div className="right-hero">
             <h1 className="title">SNEAK.IN</h1>
-            <p className="not-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, recusandae laborum itaque quae ea sint ullam commodi similique dicta repudiandae labore illum voluptas facere rerum deserunt ab possimus quisquam adipisci!
-            Delectus unde exercitationem doloribus at. Obcaecati quos libero veniam corporis similique laborum consectetur blanditiis, cum perspiciatis, culpa in suscipit ut repellat quibusdam repudiandae voluptatibus enim necessitatibus tempora, quae commodi eum!
-            Atque ipsam eius odio expedita molestiae provident. Porro nihil vero in numquam harum, iure earum repudiandae incidunt quasi, molestiae dolores tempora magnam autem ratione explicabo pariatur commodi doloribus ducimus corporis?</p>
+            <p className="not-text">Welcome to Sneak.in - the ultimate platform for buying and selling limited edition sneakers!
+                <br/>
+                At Sneak.in, we understand the importance of finding that perfect pair of sneakers that complements your style and personality.
+                That's why we have created a community-driven marketplace that connects buyers and sellers of limited edition sneakers from all around the world.
+                <br/>
+                Our platform is designed to provide a seamless and secure experience for both buyers and sellers. Whether you're looking to sell a pair of coveted sneakers from your personal collection or hoping to snag the latest release from your favorite brand, Sneak.in is the place for you.
+                </p>
             <button className="btn primary-btn"><Link to="/catalog">Shop Now</Link></button>
         </div>
     </section>
