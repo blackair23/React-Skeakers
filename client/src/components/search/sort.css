@@ -1,0 +1,13 @@
+.sort-dropdown{
+    /* border: 1px solid black; */
+    margin: 50px 0 15px auto;
+    display: flex;
+    /* gap: 20px; */
+}
+
+.sort-dropdown select{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    /* width:20px; */
+}

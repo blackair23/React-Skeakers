@@ -25,7 +25,30 @@ export const Search = ({products, filtered}) => {
         }
     }
 
+    // useEffect(() => {
+    //     const filterdProducts = products.filter(product => {
+    //         return Object.entries(values).every(([key, value]) => {
+    //           if (key === "min-price") {
+    //             return value === "" || product.price >= Number(value);
+    //           } else if (key === "max-price") {
+    //             // if(value.length === 0){
+    //             //     value = 9999999999;
+    //             // }
+    //             return value === "" || product.price <= parseFloat(value);
+    //           } else if (key === "sizes") {
+    //             return value.length === 0 || value.includes(String(product.size));
+    //         } else {
+    //             return value === "" || product[key].toLowerCase().includes(value.toLowerCase());
+    //           }
+    //         });
+    //       });
+    //       filtered(filterdProducts);
+          
+          
+    // }, [values, products])
+
     useEffect(() => {
+        console.log('product se obnovi Search')
         const filterdProducts = products.filter(product => {
             return Object.entries(values).every(([key, value]) => {
               if (key === "min-price") {
@@ -42,11 +65,67 @@ export const Search = ({products, filtered}) => {
               }
             });
           });
+            console.log('Search  ->>>', filterdProducts)
+          
           filtered(filterdProducts);
-          
-          
-    }, [values, products])// eslint-disable-line react-hooks/exhaustive-deps
+    }, [values, products]);// eslint-disable-line 
 
+
+    // const filteredRef = useRef(filtered);
+
+    // const handleFilter = useCallback(() => {
+    //   console.log('product se obnovi Search')
+    //   const filterdProducts = products.filter(product => {
+    //     return Object.entries(values).every(([key, value]) => {
+    //       if (key === "min-price") {
+    //         return value === "" || product.price >= Number(value);
+    //       } else if (key === "max-price") {
+    //         return value === "" || product.price <= parseFloat(value);
+    //       } else if (key === "sizes") {
+    //         return value.length === 0 || value.includes(String(product.size));
+    //       } else {
+    //         return value === "" || product[key].toLowerCase().includes(value.toLowerCase());
+    //       }
+    //     });
+    //   });
+    //   console.log('Search  ->>>', filterdProducts)
+    
+    //   filteredRef.current(filterdProducts);
+    // }, [values, products, filteredRef]);
+    
+    // useEffect(() => {
+    //   handleFilter();
+    // }, [handleFilter, filteredRef]);
+    
+//   const handleFilter = useCallback(() => {
+//     console.log("product se obnovi Search");
+//     const filterdProducts = products.filter((product) => {
+//       return Object.entries(values).every(([key, value]) => {
+//         if (key === "min-price") {
+//           return value === "" || product.price >= Number(value);
+//         } else if (key === "max-price") {
+//           return value === "" || product.price <= parseFloat(value);
+//         } else if (key === "sizes") {
+//           return value.length === 0 || value.includes(String(product.size));
+//         } else {
+//           return value === "" || product[key].toLowerCase().includes(value.toLowerCase());
+//         }
+//       });
+//     });
+//     console.log("Search  ->>>", filterdProducts);
+//     //   filteredRef.current(filterdProducts);
+
+//     filtered(filterdProducts);
+//   }, [values, products, filteredRef]);
+
+//   useEffect(() => {
+//     handleFilter();
+//   }, []);
+
+//   useEffect(() => {
+//     handleFilter();
+//   }, [handleFilter, filteredRef]);
+      
     return (
         <section id="search">
             <div className="seach-by-name">
