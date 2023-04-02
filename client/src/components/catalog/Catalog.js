@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getHomeProducts } from "../../services/productService";
+import { Pagination } from "../pagination/Pagination";
 import { Product } from "../Product";
 import { Search } from "../search/Search";
 import { Sort } from "../search/Sort";
@@ -64,6 +65,7 @@ export const Catalog = () => {
                 }
             </section>
         </section>
+            <Pagination products={filterProd} filtered={filtered} ></Pagination>
         </>
     )
 
