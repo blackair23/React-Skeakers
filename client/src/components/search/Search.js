@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './search.css';
 
-export const Search = ({products, filtered}) => {
-
+export const Search = ({sortValue, products, filtered}) => {
+    const [ sorted, setSorted ] = useState(products) 
     const [values, setValues] = useState(
         {name: "",
         "min-price": "",
@@ -25,106 +25,70 @@ export const Search = ({products, filtered}) => {
         }
     }
 
-    // useEffect(() => {
-    //     const filterdProducts = products.filter(product => {
-    //         return Object.entries(values).every(([key, value]) => {
-    //           if (key === "min-price") {
-    //             return value === "" || product.price >= Number(value);
-    //           } else if (key === "max-price") {
-    //             // if(value.length === 0){
-    //             //     value = 9999999999;
-    //             // }
-    //             return value === "" || product.price <= parseFloat(value);
-    //           } else if (key === "sizes") {
-    //             return value.length === 0 || value.includes(String(product.size));
-    //         } else {
-    //             return value === "" || product[key].toLowerCase().includes(value.toLowerCase());
-    //           }
-    //         });
-    //       });
-    //       filtered(filterdProducts);
-          
-          
-    // }, [values, products])
-
-    useEffect(() => {
-        console.log('product se obnovi Search')
-        const filterdProducts = products.filter(product => {
+    const capFilter = () => {
+        const filterdProducts = sorted.filter(product => {
             return Object.entries(values).every(([key, value]) => {
-              if (key === "min-price") {
+            if (key === "min-price") {
                 return value === "" || product.price >= Number(value);
-              } else if (key === "max-price") {
+            } else if (key === "max-price") {
                 // if(value.length === 0){
                 //     value = 9999999999;
                 // }
                 return value === "" || product.price <= parseFloat(value);
-              } else if (key === "sizes") {
+            } else if (key === "sizes") {
                 return value.length === 0 || value.includes(String(product.size));
             } else {
                 return value === "" || product[key].toLowerCase().includes(value.toLowerCase());
-              }
+            }
             });
-          });
-            console.log('Search  ->>>', filterdProducts)
-          
-          filtered(filterdProducts);
-    }, [values, products]);// eslint-disable-line 
+        });
+            // console.log('Promeni v filter ->>>', filterdProducts)
+        
+        filtered(filterdProducts);
+    }
 
-
-    // const filteredRef = useRef(filtered);
-
-    // const handleFilter = useCallback(() => {
-    //   console.log('product se obnovi Search')
-    //   const filterdProducts = products.filter(product => {
-    //     return Object.entries(values).every(([key, value]) => {
-    //       if (key === "min-price") {
-    //         return value === "" || product.price >= Number(value);
-    //       } else if (key === "max-price") {
-    //         return value === "" || product.price <= parseFloat(value);
-    //       } else if (key === "sizes") {
-    //         return value.length === 0 || value.includes(String(product.size));
-    //       } else {
-    //         return value === "" || product[key].toLowerCase().includes(value.toLowerCase());
-    //       }
-    //     });
-    //   });
-    //   console.log('Search  ->>>', filterdProducts)
+    useEffect(() => {
+        // console.log('product se obnovi Search')
+        // console.log(products)
+        capFilter(values, sorted);
+    }, [values, sorted]); //eslint-disable-line
     
-    //   filteredRef.current(filterdProducts);
-    // }, [values, products, filteredRef]);
-    
+    useEffect(() => {
+        // console.log('----------------Izpratena Kym Katalotg---------------')
+        // setFilterProd(filterProd)
+        // let value = {[e.target.name]: e.target.value}
+        // console.log(products, sortValue.sort);
+        let sorted = []
+        if(sortValue.sort === "Name"){
+            sorted = products.sort((a, b) => a.name.localeCompare(b.name));
+
+        }else if(sortValue.sort === "Price acending"){
+            sorted = products.sort((a, b) => a.price - b.price)
+
+        }else if(sortValue.sort === "Price decending"){
+
+            sorted = products.sort((a, b) => b.price - a.price)
+        }else if(sortValue.sort === ""){
+
+            sorted = products
+        }
+        // console.log('why dont fire on every change ', sortValue.sort)
+
+        if(sorted.length === 0) {
+            sorted = products;
+        }
+            // console.log('Sorted prod <=>', sorted);
+            setSorted(sorted);
+            capFilter(values, sorted)
+    }, [sortValue, products])//eslint-disable-line
+
+
+
     // useEffect(() => {
-    //   handleFilter();
-    // }, [handleFilter, filteredRef]);
-    
-//   const handleFilter = useCallback(() => {
-//     console.log("product se obnovi Search");
-//     const filterdProducts = products.filter((product) => {
-//       return Object.entries(values).every(([key, value]) => {
-//         if (key === "min-price") {
-//           return value === "" || product.price >= Number(value);
-//         } else if (key === "max-price") {
-//           return value === "" || product.price <= parseFloat(value);
-//         } else if (key === "sizes") {
-//           return value.length === 0 || value.includes(String(product.size));
-//         } else {
-//           return value === "" || product[key].toLowerCase().includes(value.toLowerCase());
-//         }
-//       });
-//     });
-//     console.log("Search  ->>>", filterdProducts);
-//     //   filteredRef.current(filterdProducts);
+        // console.log('Sort Change <->', sortValue)
 
-//     filtered(filterdProducts);
-//   }, [values, products, filteredRef]);
+    // }, [sortValue])
 
-//   useEffect(() => {
-//     handleFilter();
-//   }, []);
-
-//   useEffect(() => {
-//     handleFilter();
-//   }, [handleFilter, filteredRef]);
       
     return (
         <section id="search">

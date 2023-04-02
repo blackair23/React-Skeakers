@@ -9,8 +9,17 @@ import './catalog.css';
 export const Catalog = () => {
 
     const [products, setProducts] = useState([]);
-    const [sorted, setSortedProd] =useState(products)
-    const [filterProd, setFilterProd] = useState(products);
+    const [filterProd, setFilterProd] = useState([]);
+
+    const [sortValue, setSortValue] = useState('');
+
+    const [currentPage, setCurrentPage] = useState('');
+    const recordsPerPage = 2; 
+    const lastIndex = currentPage * recordsPerPage;
+    const firstindex = lastIndex - recordsPerPage;
+    const records = filterProd.slice(firstindex, lastIndex);
+
+
     useEffect(() => {
         getHomeProducts()
             .then(prod => {
@@ -22,40 +31,23 @@ export const Catalog = () => {
             })
     }, []);
     
-    useEffect(() => {
-        console.log('----------------Izpratena Kym Katalotg---------------')
-        // setFilterProd(filterProd)
-    }, [sorted])
+
     const filtered = (prod) => {
-        console.log('shoud fire filtered')
-        // return prod;
-        setFilterProd(prod);
+        setFilterProd(prod);  
     }
 
-    useEffect(() => {
-        filtered(sorted)
-    }, [sorted])
 
-    const sortProd = (sort) => {
-        console.log('shoud fire sortProd')
-        setSortedProd(sort);
-        // filtered(sort)
-        console.log('product se obnovi Sort')
-        // setFilterProd(sort)
-    } 
-
-    console.log('filter ->>>', filterProd)
-        // console.log('product se obnovi Sort')
+    // console.log('filter ->>>', filterProd)
 
     return (
         <>
-        <Sort products={products} setProducts={sortProd} filtered={filtered} ></Sort>
+        <Sort setSortValue={setSortValue}></Sort>
         <section id="catalog">
-            <Search filtered={filtered} products={sorted}></Search>
+            <Search sortValue={sortValue} filtered={filtered} products={products}></Search>
             <section id="product-section">
-                    {filterProd.length > 0
+                    {records.length > 0
                     ?
-                    filterProd.map(p => <Product key={p._id} products={p}></Product>)
+                    records.map(p => <Product key={p._id} products={p}></Product>)
                     :
                     <>
                     <div></div>
@@ -65,7 +57,7 @@ export const Catalog = () => {
                 }
             </section>
         </section>
-            <Pagination products={filterProd} filtered={filtered} ></Pagination>
+            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} products={filterProd}  ></Pagination>
         </>
     )
 

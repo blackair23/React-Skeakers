@@ -30,11 +30,11 @@
     text-decoration: underline;
 }
 
-.pagination .end-btn{
+.pagination .page-btn{
     color: #dd4040;
 
 }
-.pagination .end-btn:hover{
+.pagination .page-btn:hover{
     transform: scale(1);
 	animation: pulse 2s infinite;
 }
