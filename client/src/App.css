@@ -130,6 +130,24 @@ main{
   height: 250px;
   object-fit: cover;
 }
+
+@media (max-width: 760px) {
+  #devider-section .red-titles h2{
+    font-size: 47px;
+  }
+}
+
+@media (max-width: 550px) {
+  #devider-section .red-titles h2{
+    font-size: 32px;
+  }
+}
+@media (max-width: 380px) {
+  #devider-section .red-titles h2{
+    font-size: 24px;
+  }
+}
+
 #hero{
   display: flex;
   width: 100%;
@@ -142,10 +160,8 @@ main{
   margin: 0 auto;
 }
 #hero .hero-imgs{
-  /* border: 1px solid #000; */
   width: 50%;
   height: 650px;
-  /* margin-bottom: -250px; */
 }
 #hero .rotated-text{
   display: flex;
@@ -207,6 +223,58 @@ box-shadow: 1px 5px 33px 11px rgba(0, 0, 0, 0.219);
   margin-left: 10%;
 }
 
+@media (max-width: 1140px) {
+  #hero .rotated-text{
+    display: none;
+  }
+  
+  #hero .frosted-circle{
+    display: none;
+  }
+
+  #hero .title{
+    margin: 0;
+  }
+
+  #hero .not-text{
+    margin-left: 0px;
+    padding: 0 10px;
+  }
+  #hero .primary-btn{
+    margin-left: 0;
+  }
+  #hero .hero-imgs{
+    height: 550px;
+  }
+
+}
+
+@media (max-width: 760px) {
+  #hero{
+    flex-direction: column;
+    width: 100%;
+  }
+  #hero .hero-imgs{
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    height:auto;
+  }
+  #hero .right-hero{
+    /* display: ; */
+    width: 100%;
+    text-align: center;
+  }
+  #hero .not-text{
+    margin: 0px;
+    width: 100%;
+  }
+
+  main{
+    margin: 0;
+  }
+}
+
 /* -------------------Product section----------------------------------- */
 
 #product-section{
@@ -228,6 +296,19 @@ box-shadow: 1px 5px 33px 11px rgba(0, 0, 0, 0.219);
 }
 .product-card p:not(:nth-child(2)):not(:last-child) {
   color: #838383;
+}
+@media (max-width: 800px) {
+  #product-section{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 550px) {
+  #product-section{
+    grid-template-columns: 1fr;
+    margin: 0px auto;
+    gap: 0px;
+  }
 }
 
 
@@ -659,6 +740,28 @@ footer a{
   min-height: 100vh;
 }
 
+@media (max-width: 830px) {
+  #footer .explore-list{
+    /* display: flex; */
+    flex-direction: column;
+    /* color: #424242; */
+  }
+}
+
+@media (max-width: 600px) {
+  #footer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 450px) {
+  #footer{
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
+}
 @media (max-width: 600px) {
   .burger-menu{
       display: block;
