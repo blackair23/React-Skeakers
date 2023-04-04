@@ -1,15 +1,15 @@
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
 import './App.css';
-import { Hero } from './components/Hero';
-import { SectionDevider } from './components/SectionDevider';
-import { HomeProductSection } from './components/HomeProductSectin';
+import { Hero } from './components/hero/Hero';
+import { SectionDevider } from './components/sectionDevider/SectionDevider';
+import { HomeProductSection } from './components/homeProductSection/HomeProductSectin';
 import { Routes, Route } from 'react-router-dom';
-import { Create } from './components/Create';
+import { Create } from './components/create/Create';
 import { Detail } from './components/details/Detail';
 
 import { AuthContext } from './context/authContext';
-import Logout from './components/Logout';
+import Logout from './components/logout/Logout';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { Profile } from './components/profile/Profile';
 import { ShoppingCart } from './components/shoppingCart/ShoppingCart';

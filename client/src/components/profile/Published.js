@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { getListedItems } from "../../services/profileService";
-import { Product } from "../Product";
+import { Product } from "../products/Product";
 
 export const Published = () => {
     const { id } = useParams();

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { login } from '../services/authService';
+import { login } from '../../services/authService';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/authContext'; 
-import { useEmailValidator, useMinLenght } from '../hooks/useValidation';
+import { AuthContext } from '../../context/authContext'; 
+import { useEmailValidator, useMinLenght } from '../../hooks/useValidation';
 import swal from 'sweetalert';
 
 export const Login = ({onClose}) => {

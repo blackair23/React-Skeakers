@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import { create } from "../services/productService";
-import { useMinLenght, useUrlValidator } from "../hooks/useValidation"
+import { create } from "../../services/productService";
+import { useMinLenght, useUrlValidator } from "../../hooks/useValidation"
 
 export const Create = () => {
     const navigate = useNavigate();

@@ -460,7 +460,6 @@ box-shadow: 1px 5px 33px 11px rgba(0, 0, 0, 0.219);
 #create-section{
   display: flex;
   flex-direction: row;
-  /* display: grid; */
   /* grid-template-columns: 1fr 1fr; */
   max-width: 1200px;
   /* height: 1000px; */

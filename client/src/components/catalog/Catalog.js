@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getHomeProducts } from "../../services/productService";
 import { Pagination } from "../pagination/Pagination";
-import { Product } from "../Product";
+import { Product } from "../products/Product";
 import { Search } from "../search/Search";
 import { Sort } from "../search/Sort";
 import './catalog.css';

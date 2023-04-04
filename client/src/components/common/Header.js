@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../../context/authContext';
 import { CartConstext } from '../../context/cartContext';
-import { Login } from '../Login';
-import { Register } from '../Register';
+import { Login } from '../login/Login';
+import { Register } from '../register/Register';
 
 import './header.css';
 

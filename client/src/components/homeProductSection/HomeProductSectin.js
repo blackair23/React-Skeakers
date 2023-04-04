@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { getHomeProducts } from "../services/productService";
-import { Product } from "./Product";
+import { getHomeProducts } from "../../services/productService";
+import { Product } from "../products/Product";
 
 export const HomeProductSection = () => {
     const [products, setProducts] = useState([]);

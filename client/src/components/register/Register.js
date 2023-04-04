@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
-import { AuthContext } from '../context/authContext';
-import { registration } from '../services/authService';
+import { AuthContext } from '../../context/authContext';
+import { registration } from '../../services/authService';
 import swal from 'sweetalert';
-import { useMinLenght, useEmailValidator } from '../hooks/useValidation';
+import { useMinLenght, useEmailValidator } from '../../hooks/useValidation';
 
 export const Register = ({onClose}) => {
     const {userLogin} = useContext(AuthContext);
