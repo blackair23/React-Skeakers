@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/authContext';
@@ -6,7 +5,7 @@ import { registration } from '../../services/authService';
 import swal from 'sweetalert';
 import { useMinLenght, useEmailValidator } from '../../hooks/useValidation';
 
-export const Register = ({onClose}) => {
+export const Register = ({ onAuthClick, onClose}) => {
     const {userLogin} = useContext(AuthContext);
     const navigate = useNavigate();
     const [emailError, setEmailError] = useEmailValidator({});
@@ -61,29 +60,29 @@ export const Register = ({onClose}) => {
                             {emailError.email && 
                             <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Enter valid email!</p>
                             }
-                            <input type="text" id="email" name="email" placeholder="Enter email" value={values.email} onChange={onChangeHandler} onBlur={(e) => setEmailError(e, values)}/>
+                            <input className={emailError.email ? "error-input" : undefined} type="text" id="email" name="email" placeholder="Enter email" value={values.email} onChange={onChangeHandler} onBlur={(e) => setEmailError(e, values)}/>
                         </div>
                         <div className="form-element">
                             <label htmlFor="username">Username</label>
                             {lengthError.username && 
                             <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Username must be atleast 3 charter!</p>
                             }
-                            <input type="text" id="username" name="username" placeholder="Enter username" value={values.username} onChange={onChangeHandler} onBlur={(e) => setLengthError(e, 2, values)}/>
+                            <input className={lengthError.username ? "error-input" : undefined} type="text" id="username" name="username" placeholder="Enter username" value={values.username} onChange={onChangeHandler} onBlur={(e) => setLengthError(e, 2, values)}/>
                         </div>
                         <div className="form-element">
                             <label htmlFor="password">Password</label>
                             {lengthError.password && 
                             <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Password must be atleast 3 charter!</p>
                             }
-                            <input type="password" id="password" name="password" placeholder="Enter password" value={values.password} onChange={onChangeHandler} onBlur={(e) => setLengthError(e, 2, values)}/>
+                            <input className={lengthError.password ? "error-input" : undefined} type="password" id="password" name="password" placeholder="Enter password" value={values.password} onChange={onChangeHandler} onBlur={(e) => setLengthError(e, 2, values)}/>
                         </div>
                         <div className="form-element">
                             <label htmlFor="repass">Repeat password</label>
-                            <input type="password" id="repass" name="repass" placeholder="Repeat password" value={values.repass} onChange={onChangeHandler} />
+                            <input   type="password" id="repass" name="repass" placeholder="Repeat password" value={values.repass} onChange={onChangeHandler} />
                         </div>
                         <input className="btn primary-btn" type="submit" value="Sign up"/>
                     </form>
-                    <span>Already have an acount? <Link href="/login">Sign in</Link></span> 
+                    <span>Already have an acount? <button onClick={() => onAuthClick("login")}>Sign in</button></span> 
                 </div>
             </div>
         </div>

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { login } from '../../services/authService';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +5,12 @@ import { AuthContext } from '../../context/authContext';
 import { useEmailValidator, useMinLenght } from '../../hooks/useValidation';
 import swal from 'sweetalert';
 
-export const Login = ({onClose}) => {
+export const Login = ({ onAuthClick, onClose}) => {
+    // const [] = useState({modal: null, state: false})
+    // const onAuthClick = () => {
+    //     setModal({modal, state: true});
+    // }
+
     const { userLogin } = useContext(AuthContext);
     const [emailErr, setEmailErr] = useEmailValidator({});
     const [lengthErr, setLengthErr] = useMinLenght({});
@@ -52,18 +56,18 @@ export const Login = ({onClose}) => {
                             {emailErr.email && 
                             <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Enter valid email!</p>
                             } 
-                            <input type="text" id="email" name="email" placeholder="Enter email" value={values.email} onChange={onChangeHandler}  onBlur={(e) => setEmailErr(e, values)}/>
+                            <input className={emailErr.email ? "error-input" : undefined} type="text" id="email" name="email" placeholder="Enter email" value={values.email} onChange={onChangeHandler}  onBlur={(e) => setEmailErr(e, values)}/>
                         </div>
                         <div className="form-element">
                             <label htmlFor="password">Password</label>
                             {lengthErr.password && 
                             <p className="form-error"><i className="fa-solid fa-circle-exclamation fa-bounce"></i> Password must be atleast 3 charter!</p>
                             }
-                            <input type="password" id="password" name="password" placeholder="Enter password" value={values.password} onChange={onChangeHandler} onBlur={(e) => setLengthErr(e, 2, values)}/>
+                            <input className={lengthErr.password ? "error-input" : undefined} type="password" id="password" name="password" placeholder="Enter password" value={values.password} onChange={onChangeHandler} onBlur={(e) => setLengthErr(e, 2, values)}/>
                         </div>
                         <input className="btn primary-btn" type="submit" value="Log in"/>
                     </form>
-                    <span>Don't have an acount? <Link href="/register">Sign up</Link></span> 
+                    <span>Don't have an acount? <button onClick={() => onAuthClick("register")}>Sign up</button></span> 
                 </div>
             </div>
         </div>

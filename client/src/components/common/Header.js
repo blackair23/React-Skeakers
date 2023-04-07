@@ -24,8 +24,8 @@ export const Header = () => {
     return (
         <>
         <header>
-            {openModal.modal === "login" && <Login onClose={onClose}></Login> }
-            {openModal.modal === "register" && <Register onClose={onClose}></Register> }
+            {openModal.modal === "login" && <Login onAuthClick={onAuthClick} onClose={onClose}></Login> }
+            {openModal.modal === "register" && <Register onAuthClick={onAuthClick} onClose={onClose}></Register> }
             <nav>
                 <h1><Link to='/'>SNEAK.IN</Link></h1>
                 {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
