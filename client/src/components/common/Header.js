@@ -30,7 +30,9 @@ export const Header = () => {
                 <h1><Link to='/'>SNEAK.IN</Link></h1>
                 {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
                 <ul role="list" className="nav-links"> 
-                    <li><Link to='/create'>Sell</Link></li>
+                    {user.username ? 
+                        <li><Link to='/create'>Sell</Link></li>
+                    : ""}
                     <li><Link to='/catalog'>Catalog</Link></li>
                     <li><Link to='/about'>About us</Link></li>
                 </ul> 

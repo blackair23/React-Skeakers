@@ -18,6 +18,8 @@ import { EditProduct } from './components/details/EditProduct';
 import swal from 'sweetalert';
 import { MessageComponent } from './components/messages/Message';
 import { Catalog } from './components/catalog/Catalog';
+import { Guard } from './components/guard/Guard';
+// import { AboutUs } from './components/about/AboutUs';
 
 function App() {
   const [auth, setAuth] = useLocalStorage('auth', {});
@@ -68,12 +70,16 @@ function App() {
         <Route path="/catalog" element={<Catalog/>}/>
         <Route path="/catalog/:id" element={<Detail/>}/>
         <Route path="/catalog/edit/:id" element={<EditProduct/>}/>
-        <Route path="/about" element={<h2>About Page</h2>}/>
+        <Route path="/about" element={<h1>About US</h1>}/>
+        {/* <Route path="/about" element={<AboutUs></AboutUs>}/> */}
         <Route path="/logout" element={<Logout></Logout>}/>
-        <Route path="/create" element={<Create></Create>}/>
-        <Route path="/profile/:id" element={<Profile></Profile>}/>
         <Route path="/cart" element={<ShoppingCart></ShoppingCart>}/>
-        <Route path="/message" element={<MessageComponent></MessageComponent>}/>
+        <Route element={<Guard></Guard>}>
+          <Route path="/create" element={<Create></Create>}/>
+          <Route path="/profile/:id" element={<Profile></Profile>}/>
+          <Route path="/message" element={<MessageComponent></MessageComponent>}/>
+        </Route>
+        <Route path="/*" element={<><Hero/><SectionDevider/><HomeProductSection/></>}/>
       </Routes>
       </main>
       <Footer></Footer>
